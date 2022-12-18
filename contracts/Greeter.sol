@@ -19,6 +19,14 @@ contract Greeter {
 
     function setGreeting(string memory _greeting) public {
         console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
+
+        // uint256 sum = 0;
+        // for (uint256 i = 0; i < 1000; i++) {
+        //     sum += i;
+        //     // console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
+        // }
+        // sum;
+
         greeting = _greeting;
     }
 

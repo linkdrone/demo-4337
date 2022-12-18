@@ -24,3 +24,11 @@ coverage.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# circom
+circoms/*_cpp
+circoms/*_js
+circoms/*.r1cs
+circoms/*.sym
+circoms/*.ptau
+circoms/*.zkey
