@@ -91,6 +91,7 @@
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain"
   },
   "dependencies": {
+    "ffjavascript": "^0.2.57",
     "snarkjs": "^0.5.0"
   }
 }

@@ -1057,6 +1057,7 @@ __metadata:
     eslint: ^8.28.0
     eslint-config-prettier: ^8.5.0
     ethers: ^5.7.2
+    ffjavascript: ^0.2.57
     fs-extra: ^11.1.0
     hardhat: ^2.12.2
     hardhat-gas-reporter: ^1.0.9
@@ -4684,7 +4685,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ffjavascript@npm:^0.2.48":
+"ffjavascript@npm:^0.2.48, ffjavascript@npm:^0.2.57":
   version: 0.2.57
   resolution: "ffjavascript@npm:0.2.57"
   dependencies:
