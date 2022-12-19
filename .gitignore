@@ -30,5 +30,5 @@ circoms/*_cpp
 circoms/*_js
 circoms/*.r1cs
 circoms/*.sym
-circoms/*.ptau
-circoms/*.zkey
+circoms/proof.json
+circoms/public.json
