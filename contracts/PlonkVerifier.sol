@@ -546,4 +546,8 @@ contract PlonkVerifier {
             return(0, 0x20)
         }
     }
+
+    function writeVerifyProof(bytes memory proof, uint[] memory pubSignals) external {
+        this.verifyProof(proof, pubSignals);
+    }
 }
