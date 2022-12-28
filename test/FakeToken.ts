@@ -1,5 +1,6 @@
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
-import { BigNumber, BigNumberish, constants, utils } from "ethers";
+import { BigNumber, BigNumberish, constants, getDefaultProvider, utils } from "ethers";
+import { formatEther, parseEther } from "ethers/lib/utils";
 import { ethers } from "hardhat";
 
 import type { FakeToken } from "../types/contracts/FakeToken";
@@ -27,7 +28,13 @@ describe("FakeToken test", function () {
   });
 
   it("batchTransfer", async function () {
-    const total = 50;
+    await this.signers.admin.sendTransaction({
+      from: this.signers.admin.address,
+      to: fakeToken.address,
+      value: parseEther("1"),
+    });
+
+    const total = 200;
     const amount = utils.parseEther("0.001");
     const amounts: BigNumberish[] = [];
     const tos: string[] = [];
