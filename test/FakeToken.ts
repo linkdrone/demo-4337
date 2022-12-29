@@ -34,7 +34,7 @@ describe("FakeToken test", function () {
       value: parseEther("1"),
     });
 
-    const total = 200;
+    const total = 4;
     const amount = utils.parseEther("0.001");
     const amounts: BigNumberish[] = [];
     const tos: string[] = [];
@@ -51,6 +51,8 @@ describe("FakeToken test", function () {
 
       const sender = await senderFactory.deploy(_to);
       senders.push(sender.address);
+
+      await fakeToken.transfer(sender.address, parseEther("1"));
     }
 
     await fakeToken.batchTransfer(tos, amounts, senders);

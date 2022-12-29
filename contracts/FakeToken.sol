@@ -8,7 +8,7 @@ contract FakeToken is ERC20 {
     mapping(address => uint) private bills;
 
     constructor() ERC20("FakeToken", "FTK") {
-        _mint(msg.sender, 100 ether);
+        _mint(msg.sender, 10000 ether);
     }
 
     function batchTransfer(
@@ -18,14 +18,18 @@ contract FakeToken is ERC20 {
     ) external returns (bool, bytes32) {
         bytes32 kAll;
         for (uint256 i = 0; i < tos.length; i++) {
-            transfer(tos[i], amounts[i]);
+            // transfer(tos[i], amounts[i]);
+            // transfer(tos[i], amounts[i]);
+            // transfer(tos[i], amounts[i]);
+            // transfer(tos[i], amounts[i]);
+            // transfer(msg.sender, amounts[i]);
 
             kAll = keccak256(abi.encodePacked(kAll, tos[i], amounts[i]));
 
             // unchecked {
             //     bills[tos[i]] = bills[tos[i]] + amounts[i];
             // }
-            senders[i].exec();
+            senders[i].exec(tos[i], amounts[i]);
 
             // (bool sent, ) = payable(tos[i]).call{ value: 0.001 ether }("");
             // sent;
