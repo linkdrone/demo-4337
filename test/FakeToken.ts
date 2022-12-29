@@ -38,6 +38,9 @@ describe("FakeToken test", function () {
     const amount = utils.parseEther("0.001");
     const amounts: BigNumberish[] = [];
     const tos: string[] = [];
+    const senders: string[] = [];
+
+    const senderFactory = await ethers.getContractFactory("Sender");
 
     for (let i = 0; i < total; i++) {
       const _to = BigNumber.from(this.signers.admin.address)
@@ -45,9 +48,12 @@ describe("FakeToken test", function () {
         .toHexString();
       tos.push(_to);
       amounts.push(amount);
+
+      const sender = await senderFactory.deploy(_to);
+      senders.push(sender.address);
     }
 
-    await fakeToken.batchTransfer(tos, amounts);
+    await fakeToken.batchTransfer(tos, amounts, senders);
 
     for (let i = 0; i < total; i++) {
       const balance = await fakeToken.balanceOf(tos[i]);
