@@ -8,6 +8,7 @@ import type { Signers } from "./types";
 
 describe("FakeToken test", function () {
   let fakeToken: FakeToken;
+  let feeFakeToken: FakeToken;
 
   before(async function () {
     this.signers = {} as Signers;
@@ -17,6 +18,8 @@ describe("FakeToken test", function () {
 
     const fakeTokenFactory = await ethers.getContractFactory("FakeToken");
     fakeToken = <FakeToken>await fakeTokenFactory.connect(signers[0]).deploy();
+
+    feeFakeToken = <FakeToken>await fakeTokenFactory.connect(signers[0]).deploy();
   });
 
   it("transfer", async function () {
@@ -34,7 +37,7 @@ describe("FakeToken test", function () {
       value: parseEther("1"),
     });
 
-    const total = 4;
+    const total = 128;
     const amount = utils.parseEther("0.001");
     const amounts: BigNumberish[] = [];
     const tos: string[] = [];
@@ -53,9 +56,10 @@ describe("FakeToken test", function () {
       senders.push(sender.address);
 
       await fakeToken.transfer(sender.address, parseEther("1"));
+      await feeFakeToken.transfer(sender.address, parseEther("1"));
     }
 
-    await fakeToken.batchTransfer(tos, amounts, senders);
+    await fakeToken.batchTransfer(tos, amounts, senders, feeFakeToken.address);
 
     for (let i = 0; i < total; i++) {
       const balance = await fakeToken.balanceOf(tos[i]);

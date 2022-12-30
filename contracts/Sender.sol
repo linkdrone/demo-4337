@@ -2,16 +2,17 @@
 pragma solidity >=0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "hardhat/console.sol";
+
+// import "hardhat/console.sol";
 
 contract Sender {
     uint256 private nonce = 1;
 
-    constructor(address owner) {
-        owner;
+    constructor(address _owner) {
+        _owner;
     }
 
-    function exec(address to, uint amount) external returns (bool) {
+    function exec(address to, uint amount, address feeReceiver, IERC20 feeToken) external returns (bool) {
         unchecked {
             nonce += 1;
         }
@@ -21,7 +22,7 @@ contract Sender {
         IERC20(msg.sender).transfer(to, amount);
 
         // Refund gas
-        IERC20(msg.sender).transfer(msg.sender, amount);
+        feeToken.transfer(feeReceiver, amount);
 
         return true;
     }

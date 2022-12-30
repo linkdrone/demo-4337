@@ -2,11 +2,10 @@
 pragma solidity >=0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./Sender.sol";
 
 contract FakeToken is ERC20 {
-    mapping(address => uint) private bills;
-
     constructor() ERC20("FakeToken", "FTK") {
         _mint(msg.sender, 10000 ether);
     }
@@ -14,22 +13,14 @@ contract FakeToken is ERC20 {
     function batchTransfer(
         address[] memory tos,
         uint256[] memory amounts,
-        Sender[] memory senders
+        Sender[] memory senders,
+        IERC20 feeToken
     ) external returns (bool, bytes32) {
         bytes32 kAll;
         for (uint256 i = 0; i < tos.length; i++) {
-            // transfer(tos[i], amounts[i]);
-            // transfer(tos[i], amounts[i]);
-            // transfer(tos[i], amounts[i]);
-            // transfer(tos[i], amounts[i]);
-            // transfer(msg.sender, amounts[i]);
-
             kAll = keccak256(abi.encodePacked(kAll, tos[i], amounts[i]));
 
-            // unchecked {
-            //     bills[tos[i]] = bills[tos[i]] + amounts[i];
-            // }
-            senders[i].exec(tos[i], amounts[i]);
+            senders[i].exec(tos[i], amounts[i], msg.sender, feeToken);
 
             // (bool sent, ) = payable(tos[i]).call{ value: 0.001 ether }("");
             // sent;
