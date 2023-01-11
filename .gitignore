@@ -32,3 +32,4 @@ circoms/*.r1cs
 circoms/*.sym
 circoms/proof.json
 circoms/public.json
+node_modules
