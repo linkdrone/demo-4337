@@ -17,6 +17,7 @@
 **/types
 
 # files
+.DS_Store
 *.env
 *.log
 .pnp.*
